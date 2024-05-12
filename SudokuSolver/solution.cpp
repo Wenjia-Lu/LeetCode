@@ -10,6 +10,7 @@ size_t coor_row = 0;
 size_t coor_col = 0;
 vector<vector<char> > bestBoard;
 bool solution_found = false;
+bool isFull = false;
 
 public:
 
@@ -54,18 +55,18 @@ public:
         return true;
     }
 
-    bool isFull(vector<vector<char> > & board){
-        // cout << "Checking isFull... \n";
+    // bool isFull(vector<vector<char> > & board){
+    //     // cout << "Checking isFull... \n";
 
-        for(size_t r = 0; r < SIZE; r++){
-            for (size_t c = 0; c < SIZE; c++){
-                if(board[r][c] == '.') return false;
-            }
-        }
+    //     for(size_t r = 0; r < SIZE; r++){
+    //         for (size_t c = 0; c < SIZE; c++){
+    //             if(board[r][c] == '.') return false;
+    //         }
+    //     }
 
-        // cout << "Found full. \n";
-        return true;
-    }
+    //     // cout << "Found full. \n";
+    //     return true;
+    // }
 
     bool satGrid(vector<vector<char> > & board, size_t row, size_t col){
         vector<int> hash(SIZE, 0); // initialize hash to a vector of 0
@@ -89,7 +90,7 @@ public:
     } // bool
 
     // done sets coor to empty's coor & return a likely valid number for coor
-    void find_empty(vector<vector<char> > & board){
+    bool find_empty(vector<vector<char> > & board){
 
         for (size_t r = 0; r < SIZE; r++){
 
@@ -123,7 +124,7 @@ public:
                     // } // for
 
 
-                    return;
+                    return false;
 
                 } // else
 
@@ -132,7 +133,7 @@ public:
             } // c
         } // r
 
-        return ;
+        return true;
     }
 
     void outputBoard(vector<vector<char> > & board){
@@ -153,7 +154,7 @@ public:
         if(solution_found) return;
 
         // solution found
-        if (isFull(board) && isPromising(board, coor_row, coor_col)) {
+        if (isFull && isPromising(board, coor_row, coor_col)) {
             // cout << "Board FULL! \n";
             solution_found = true;
             bestBoard = board;
@@ -167,7 +168,7 @@ public:
         }
             
         // genPerms: possible values for current square
-        find_empty(board);
+        isFull = find_empty(board);
         size_t currRow = coor_row; size_t currCol = coor_col;
         //    cout << "At (" << currRow << ", "  << currCol << "): \n";    
         for(size_t num = 0; num < SIZE; num++){
@@ -192,6 +193,7 @@ public:
         coor_col = 0;
         bestBoard.clear();
         solution_found = false;
+        isFull = false;
     }
 };
 
@@ -207,7 +209,7 @@ int main(){
     {'.','6','.','.','.','.','2','8','.'}, 
     {'.','.','.','4','1','9','.','.','5'}, 
     {'.','.','.','.','8','.','.','7','9'} };
-
+    
     cout << "Board created! \n";
 
     Solution solution; 
