@@ -1,60 +1,58 @@
 #include <iostream>
 
 using namespace std;
+
 class Solution {
 
 const size_t SIZE = 9;
 const size_t SMALL = 3;
 size_t coor_row = 0;
 size_t coor_col = 0;
+vector<vector<char> > bestBoard;
 bool solution_found = false;
-vector<char> possibleValues;
 
 public:
-    vector<vector<char> > bestBoard;
 
     bool isPromising(vector<vector<char> > & board, size_t row, size_t col){
 
         // cout << "Checking Promising... \n";
 
         // promising if it pass row, pass col, pass grid
-        /*
-        satRow(board, row) 
+        
+        return satRow(board, row) 
             && satCol(board, col) 
-           && 
-        */
-        return satGrid(board, row, col);
+           && satGrid(board, row, col);
     }
 
-    // bool satRow(vector<vector<char> > & board, size_t row){
-    //     vector<int> hash(SIZE, 0); // initialize hash to a vector of 0
+    bool satRow(vector<vector<char> > & board, size_t row){
+        vector<int> hash(SIZE, 0); // initialize hash to a vector of 0
 
-    //     for(size_t c = 0; c < SIZE; c++){
-    //         if (board[row][c] != '.'){
-    //             size_t index = size_t(board[row][c] - '1');
-    //             if (hash[index] >= 1) return false;
-    //             hash[index] ++;
-    //         }
+        for(size_t c = 0; c < SIZE; c++){
+            if (board[row][c] != '.'){
+                size_t index = size_t(board[row][c] - '1');
+                if (hash[index] >= 1) return false;
+                hash[index] ++;
+            }
             
-    //     }
+        }
 
-    //     //  cout << "Sat ROW! \n";
-    //     return true;
-    // }
+        //  cout << "Sat ROW! \n";
+        return true;
+    }
 
-    // bool satCol(vector<vector<char> > & board, size_t col){
-    //     vector<int> hash(SIZE, 0); // initialize hash to a vector of 0
+    bool satCol(vector<vector<char> > & board, size_t col){
+        vector<int> hash(SIZE, 0); // initialize hash to a vector of 0
 
-    //     for(size_t r = 0; r < SIZE; r++){
-    //         if (board[r][col] != '.'){
-    //             size_t index = size_t(board[r][col] - '1');
-    //             if (hash[index] >= 1) return false;
-    //             hash[index] ++;
-    //         }
-    //     }
-    //     // cout << "Sat COL! \n";
-    //     return true;
-    // }
+        for(size_t r = 0; r < SIZE; r++){
+            if (board[r][col] != '.'){
+                size_t index = size_t(board[r][col] - '1');
+                if (hash[index] >= 1) return false;
+                hash[index] ++;
+            }
+        }
+        // cout << "Sat COL! \n";
+        return true;
+    }
 
     bool isFull(vector<vector<char> > & board){
         // cout << "Checking isFull... \n";
@@ -102,27 +100,27 @@ public:
                     coor_row = r;
                     coor_col = c;
 
-                    vector<int> rowHash(SIZE, 0); // initialize hash to a vector of 0
-                    vector<int> colHash(SIZE, 0); // initialize hash to a vector of 0
+                    // vector<int> rowHash(SIZE, 0); // initialize hash to a vector of 0
+                    // vector<int> colHash(SIZE, 0); // initialize hash to a vector of 0
 
-                    // going through already filled in values of its ROW & COL
-                    for(size_t i = 0; i < SIZE; i++){
-                        if (board[r][i] != '.') {
-                            size_t index_col = size_t(board[r][i] - '1');
-                            rowHash[index_col] ++;
-                        }
-                        if (board[i][c] != '.') {
-                            size_t index_col = size_t(board[i][c] - '1');
-                            colHash[index_col] ++;
-                        }
-                    } // for
+                    // // going through already filled in values of its ROW & COL
+                    // for(size_t i = 0; i < SIZE; i++){
+                    //     if (board[r][i] != '.') {
+                    //         size_t index_col = size_t(board[r][i] - '1');
+                    //         rowHash[index_col] ++;
+                    //     }
+                    //     if (board[i][c] != '.') {
+                    //         size_t index_col = size_t(board[i][c] - '1');
+                    //         colHash[index_col] ++;
+                    //     }
+                    // } // for
 
-                    // going through each number and see if it's a logical fit into the board
-                    for(size_t i = 0; i < SIZE; i++){
-                        if (rowHash[i] == 0 && colHash[i] == 0) {
-                            possibleValues.push_back(char('1' + i));
-                        }
-                    } // for
+                    // // going through each number and see if it's a logical fit into the board
+                    // for(size_t i = 0; i < SIZE; i++){
+                    //     if (rowHash[i] == 0 && colHash[i] == 0) {
+                    //         possibleValues.push_back(char('1' + i));
+                    //     }
+                    // } // for
 
 
                     return;
@@ -155,7 +153,7 @@ public:
         if(solution_found) return;
 
         // solution found
-        if (isFull(board)) {
+        if (isFull(board) && isPromising(board, coor_row, coor_col)) {
             // cout << "Board FULL! \n";
             solution_found = true;
             bestBoard = board;
@@ -172,9 +170,8 @@ public:
         find_empty(board);
         size_t currRow = coor_row; size_t currCol = coor_col;
         //    cout << "At (" << currRow << ", "  << currCol << "): \n";    
-        //char('1' + num)
-        for(size_t num = 0; num < possibleValues.size(); num++){
-                board[currRow][currCol] = possibleValues[num];
+        for(size_t num = 0; num < SIZE; num++){
+                board[currRow][currCol] = char('1' + num);
 
                 solver(board);
 
@@ -191,13 +188,11 @@ public:
     }
 
     void reset(){
-         coor_row = 0;
-         coor_col = 0;
-         bestBoard.clear();
-         solution_found = false;
-         possibleValues.clear();
+        coor_row = 0;
+        coor_col = 0;
+        bestBoard.clear();
+        solution_found = false;
     }
-
 };
 
 
