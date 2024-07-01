@@ -12,15 +12,15 @@ public:
         string ans;
         string tmp;
         size_t i =0;
-        char* p;
-        str1.size() < str2.size() ? p = &str1[0] : p = &str2[0];
-        while(i < str1.size() && i < str2.size()){
-            tmp += *p;
-            i++;
-            p++;
+        string &s = str2;
+        if (str1.size() < str2.size()){
+            string &s = str1;
+        }
+        while(i < s.size()){
+            tmp += s[i++];
             
             // t divides s calc
-            if (eq(tmp, str1)&& eq(tmp, str2)){
+            if (eq(tmp, str1) && eq(tmp, str2)){
                 ans = tmp;
             }
         }
