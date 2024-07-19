@@ -5,18 +5,17 @@ public:
         int n = nums.size();
         vector<int> sol(n);
 
-        int m = n -1;
-        sol[m] = 1;
+        sol[--n] = 1;
 
-        while(m > 0){
-            sol[m-1] = sol[m] * nums[m];
-            m--;
+        while(n > 0){
+            sol[n-1] = sol[n] * nums[n];
+            n--;
         }
 
-        m = 1;
-        for(int i = 0; i < n; i++){
-            sol[i] *= m;
-            m *= nums[i];
+        n = 1;
+        for(int i = 0; i < nums.size(); i++){
+            sol[i] *= n;
+            n *= nums[i];
         }
 
         return sol;
