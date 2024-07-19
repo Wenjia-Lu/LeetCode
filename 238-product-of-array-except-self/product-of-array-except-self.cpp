@@ -4,7 +4,7 @@ public:
         // keep running product
         int n = nums.size();
         vector<int> sol(n);
-
+        
         sol[--n] = 1;
 
         while(n > 0){
