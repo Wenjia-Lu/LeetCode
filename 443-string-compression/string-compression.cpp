@@ -1,29 +1,43 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
-        string s;
-        char currC = chars[0];
-        int currCount = 0;
-        s += chars[0];
+        size_t p1 = 0;
+        size_t p2 = 0;
+        size_t currLen = 0;
+        char currChar = chars[0];
+        string sLen;
 
-        // a a b b c c c
-        // 
-        for (size_t p = 0; p < chars.size(); p++){
 
-            if(currC != chars[p]) {
-
-                if(currCount > 1) s += to_string(currCount);
-
-                s += chars[p];
-                currCount = 1;
-                currC = chars[p];
+    while(p2 <= chars.size()){
+            if (p2 == chars.size() || chars[p2] != currChar) {
+                p1++;
+                if(currLen > 1){
+                    sLen = to_string(currLen);
+                    for(char c : sLen){
+                        chars[p1++] = c;
+                    }
+                }
+                if (p2 < chars.size()) {
+                    chars[p1] = chars[p2];
+                    currChar = chars[p2];
+                } 
+                currLen = 1;
             }
-            else {  
-                currCount ++;
+            else {
+                currLen ++;
             }
+
+            p2++;
         }
-        if(currCount > 1 ) s += to_string(currCount);
-        chars.assign(s.begin(), s.end());
+
+
+        // 
+        while(p1 < chars.size()){
+            chars.pop_back();
+        }
+
         return (int)chars.size();
     }
+
+
 };
