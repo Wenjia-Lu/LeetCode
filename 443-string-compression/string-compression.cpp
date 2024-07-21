@@ -12,21 +12,22 @@ public:
             if (p2 == chars.size() || chars[p2] != currChar) {
                 p1++;
                 if(currLen > 1){
-                    size_t k = 0;
-                    while(currLen){
-                        chars[p1++] = '0' + (currLen % 10);
-                        currLen /= 10;
-                        k++;
-                    }
-                    reverse(chars.begin() + p1 - k, chars.begin() + p1);
-                    // sLen = to_string(currLen);
-                    // for(char c : sLen){
-                    //     chars[p1++] = c;
+                    // size_t k = 0;
+                    // while(currLen){
+                    //     chars[p1++] = '0' + (currLen % 10);
+                    //     currLen /= 10;
+                    //     k++;
                     // }
+                    // reverse(chars.begin() + p1 - k, chars.begin() + p1);
+                    sLen = to_string(currLen);
+                    for(char c : sLen){
+                        chars[p1++] = c;
+                    }
                 }
                 if (p2 < chars.size()) {
-                    chars[p1] = chars[p2];
                     currChar = chars[p2];
+                    chars[p1] = currChar;
+
                 } 
                 currLen = 1;
             }
