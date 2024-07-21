@@ -8,7 +8,7 @@ public:
         string sLen;
 
 
-    while(p2 <= chars.size()){
+        while(p2 <= chars.size()){
             if (p2 == chars.size() || chars[p2] != currChar) {
                 p1++;
                 if(currLen > 1){
