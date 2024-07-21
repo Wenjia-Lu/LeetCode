@@ -4,11 +4,9 @@ public:
         if(!s.size()) return true;
 
         int j = 0;
-        int n = t.size();
-        int m = s.size() - 1;
-        for (size_t i = 0; i < n; i++){
+        for (size_t i = 0; i < t.size(); i++){
             if (t[i] == s[j]) j++;
-            if (j > m) return true;
+            if (j >= s.size()) return true;
         }
         return false;
     }
