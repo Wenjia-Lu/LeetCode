@@ -6,20 +6,10 @@ public:
         int best = 0;
         int z = 0;
         for(size_t r = 0; r < nums.size(); r++){
-
-            if (nums[r] == 1){
-                ct++;
-            }
-            else { // num == 0
-                z++;
-            }
+            nums[r] ? ct++ : z++;
 
             if (z > k) { // at 3rd zero
-                if (nums[l] == 0){
-                    z--;
-                } else {
-                    ct--;
-                }
+                !nums[l] ? z-- : ct--;
                 l++;
             }
 
