@@ -16,10 +16,10 @@ public:
 
             if (z > k) { // at 3rd zero
                 // if r is last element & [r] == 0
-                if (r == nums.size() - 1){
-                    best = max(best, ct + min(k, z));
-                    return best;
-                }
+                // if (r == nums.size() - 1){
+                //     best = max(best, ct + min(k, z));
+                //     return best;
+                // }
 
                 while (nums[l++] != 0){ // no boundck needed i think? cuz [r] must be 0
                     ct--;
