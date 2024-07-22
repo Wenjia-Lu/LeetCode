@@ -7,7 +7,7 @@ public:
         int z = 0;
         for(size_t r = 0; r < nums.size(); r++){
 
-            if (nums[r]){
+            if (nums[r] == 1){
                 ct++;
             }
             else { // num == 0
