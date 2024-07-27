@@ -6,9 +6,10 @@ public:
         for(int i : nums){
             rightSum += i;
         }
-
+        
         for(size_t i = 0; i < nums.size(); ++i){
-            if (leftSum == (rightSum - leftSum - nums[i])) return i;
+            if (leftSum == (rightSum - nums[i])) return i;
+            rightSum -= nums[i];
             leftSum += nums[i];
         }
 
