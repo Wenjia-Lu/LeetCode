@@ -4,13 +4,12 @@ public:
     int isWater(vector<vector<int>>& grid, int r, int c){
         if (r < 0 || r >= grid.size()) return 1;
         if (c < 0 || c >= grid[0].size()) return 1;
-        return (grid[r][c] + 1 ) % 2; // return opposite
+        return (grid[r][c] + 1 ) % 2;
     }
 
     int islandPerimeter(vector<vector<int>>& grid) {
         int param = 0;
 
-        // find first island
         for(int r = 0; r < grid.size(); r++){
             for(int c = 0; c < grid[0].size(); c++){
                 if (grid[r][c]){
