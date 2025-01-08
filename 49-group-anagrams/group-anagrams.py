@@ -8,10 +8,6 @@ class Solution:
             else:
                 d[a] = [s]
         
-        ans = []
-        for k in d:
-            ans.append(d[k])
-        return ans
-
+        return list(d.values())
 
         
