@@ -1,19 +1,17 @@
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        first = 0
-        last = len(numbers) - 1
+        a = 0
+        b = len(numbers) - 1
 
-        n = numbers[first] + numbers[last]
+        n = numbers[a] + numbers[b]
 
         while n != target:
-            print("n: ", n)
             if n > target:
-                last -= 1
+                b -= 1
             else:
-                first += 1
-            print("first, last: ", first, " ", last)
+                a += 1
             
-            n = numbers[first] + numbers[last]
+            n = numbers[a] + numbers[b]
         
-        return [first + 1, last + 1]
+        return [a + 1, b + 1]
         
