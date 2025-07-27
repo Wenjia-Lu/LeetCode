@@ -3,8 +3,7 @@ class Solution:
         if len(height) == 1:
             return 0
         a, b = 0, len(height) - 1
-        maxL = height[a]
-        maxR = height[b]
+        maxL, maxR = height[a], height[b]
         total = 0
         while a < b:
             if maxL < maxR:
