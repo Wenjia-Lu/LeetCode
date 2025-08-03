@@ -5,10 +5,9 @@ class Solution:
         for r in range(len(s)):
             d[s[r]] = d.get(s[r], 0) + 1
             maxf = max(maxf, d[s[r]])
-
+            #     window size
             while (r - l + 1) - maxf > k: # more replaces than chances
-                d[s[l]] -= 1
+                d[s[l]] -= 1    
                 l += 1
-            ans = max(ans, r - l + 1)
-
+            ans = max(ans, (r - l + 1))
         return ans
