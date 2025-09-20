@@ -4,9 +4,6 @@ class Solution:
         for i in range(len(s)):
             d[ord(s[i]) - ord('a')] += 1
             d[ord(t[i]) - ord('a')] -= 1
-        print(d)
-        for i in range(26):
-            print(chr(i + ord('a')), d[i])
         sa = 0
         ta = 0
         for i in d:
