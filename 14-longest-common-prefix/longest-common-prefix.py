@@ -2,8 +2,9 @@ class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         if strs == []:
             return ""
+        pre = set()
         for i in range(len(strs[0])): # O(n)
-            pre = set()
+            pre.clear()
             for s in strs:
                 if i > len(s) - 1:
                     return s
