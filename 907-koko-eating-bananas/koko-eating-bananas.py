@@ -6,17 +6,13 @@ class Solution:
         return hrs
 
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        l, r = 1, sum(piles)
+        l, r = 1, max(piles)
         mid = 0
-        # print(l,r)
         prev = -10
         while l < r:
             mid = l + (r-l)//2
             time_spent = self.eating_hours(piles, mid)
-            # if prev == mid:
-            #     return int(mid)
-            # prev = mid
-
+            print(time_spent, )
             if time_spent > h: # ate too slow
                 l = mid + 1
             else:
