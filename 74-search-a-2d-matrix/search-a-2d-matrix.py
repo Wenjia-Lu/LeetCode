@@ -4,6 +4,7 @@ class Solution:
         t, b = 0, len(matrix) - 1
         row = -1
 
+        # first find the correct row
         while t <= b:
             mid = t + (b-t)//2
             if matrix[mid][l] <= target <= matrix[mid][r]:
@@ -15,6 +16,8 @@ class Solution:
                 b = mid - 1
         if row == -1:
             return False
+
+        # then do normal binary search
         row = matrix[row]
         while l <= r:
             mid = l + (r-l)//2
