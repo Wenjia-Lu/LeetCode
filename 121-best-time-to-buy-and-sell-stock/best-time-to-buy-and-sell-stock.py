@@ -1,16 +1,16 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         n = len(prices)
-        maxSell = [0] * n
-        highest = 0
-        for i in range(n-2, -1, -1):
-            highest = max(highest, prices[i+1])
-            maxSell[i] = highest
-
-        highest = -1
-        for i, price in enumerate(prices):
-            highest = max(highest, maxSell[i] - price)
-        return max(highest, 0)
+        if n == 1:
+            return 0
+        buy, sell = n - 2, n - 1
+        maxSell, maxProfit = prices[sell], 0
+        while buy > -1:
+            maxSell = max(maxSell, prices[sell])
+            maxProfit = max(maxProfit, maxSell - prices[buy])
+            sell -= 1
+            buy -= 1
+        return maxProfit
 
 
         
