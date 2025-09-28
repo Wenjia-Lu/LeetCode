@@ -1,13 +1,16 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        window = {}
+        seen = {}
         l = 0
         longest = 0
         for r, c in enumerate(s):
-            if c in window and window[c] >= l:
-                l = window[c] + 1
+            # only need to shift l to ignore duplicates if 
+            #   the dup is WITHIN the current window
+            if c in seen and seen[c] >= l:
+                l = seen[c] + 1
             longest = max(longest, r - l + 1)
-            window[c] = r
+            seen[c] = r
         return longest
 
-# Optimization: instead of while, keep track of indices
+# abba
+# 
