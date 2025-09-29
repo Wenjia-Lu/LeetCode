@@ -4,6 +4,7 @@ class Solution:
         seen = {}
         best = 0
         for r, c in enumerate(s):
+            # if dup AND within window
             if s[r] in seen and seen[s[r]] >= l:
                 l = seen[s[r]] + 1
             seen[s[r]] = r
