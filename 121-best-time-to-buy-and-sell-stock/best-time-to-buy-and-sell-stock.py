@@ -3,14 +3,15 @@ class Solution:
         n = len(prices)
         if n == 1:
             return 0
-        buy, sell = n - 2, n - 1
-        maxSell, maxProfit = prices[sell], 0
-        while buy > -1:
-            maxSell = max(maxSell, prices[sell])
-            maxProfit = max(maxProfit, maxSell - prices[buy])
-            sell -= 1
-            buy -= 1
-        return maxProfit
+        sell = prices[-1]
+        max_profit = 0
+        for buy_day in range(n-2, -1,-1):
+            cost = prices[buy_day]
+            max_profit = max(max_profit, sell - cost) 
+            sell = max(sell, cost)
+        return max_profit
+
+
 
 
         
