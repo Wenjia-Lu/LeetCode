@@ -6,11 +6,10 @@ class Solution:
         best = 1
         for n in nset:
             if n - 1 not in nset:
-                next = n + 1
                 curr = 1
-                while next in nset:
+                while n + 1 in nset:
                     curr += 1
                     best = max(best, curr)
-                    next += 1
+                    n += 1
         return best
 
