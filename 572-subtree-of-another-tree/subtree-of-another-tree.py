@@ -5,18 +5,19 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSame(self, l, r):
-            if l == None:
-                return r == None
-            if r == None:
-                return l == None
-            
-            return l.val == r.val and self.isSame(l.left, r.left) and self.isSame(l.right, r.right)
-
-    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool: 
-        # O(S * T): checking each node in root against the entire subRoot
+    def hash(self, root, s):
         if root == None:
-            return False
-        if self.isSame(root, subRoot): 
-            return True
-        return self.isSubtree(root.left, subRoot) or self.isSubtree(root.right, subRoot)
+            s.append("# ")
+            return
+        s.append(f"L{root.val}R ")
+        self.hash(root.left, s)
+        self.hash(root.right, s)
+
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        s = []
+        t = []
+        self.hash(root, s)
+        self.hash(subRoot, t)
+        s = "".join(s)
+        t = "".join(t)
+        return t in s
