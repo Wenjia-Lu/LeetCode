@@ -6,7 +6,6 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        arr = []
 
         def level(root, h):
             if not root:
@@ -16,7 +15,9 @@ class Solution:
             arr[h - 1].append(root.val)
             level(root.left, h+1)
             level(root.right, h+1)
-            
-        level(root, 1)
         
+        arr = []
+
+        level(root, 1)
+
         return arr
