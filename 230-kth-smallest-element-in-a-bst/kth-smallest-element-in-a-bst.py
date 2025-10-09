@@ -11,6 +11,8 @@ class Solution:
         def helper(root):
             nonlocal kth
             nonlocal i
+            if i > k:
+                return
             if not root:
                 return
             helper(root.left)
