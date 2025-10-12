@@ -3,14 +3,14 @@ class Solution:
         result = []
 
         def backtrack(nums, subset):
-            if nums == []:
-                result.append(copy.deepcopy(subset))
+            if not nums:
+                result.append(subset[:])
                 return
-            
-            n = nums[-1]
-            backtrack(nums[:-1], subset)
-            backtrack(nums[:-1], subset + [n])
+
+            n = nums.pop()
+            backtrack(nums, subset)         # exclude n
+            backtrack(nums, subset + [n])   # include n
+            nums.append(n)                  # backtrack (undo)
 
         backtrack(nums, [])
- 
         return result
