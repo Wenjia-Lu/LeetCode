@@ -1,16 +1,27 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        result = []
+        powerset = []
 
-        def backtrack(nums, subset):
-            if not nums:
-                result.append(subset[:])
+        def dfs(i, curr):
+            if i == len(nums):
+                powerset.append(curr.copy())
                 return
+            
+            # take
+            curr.append(nums[i])
+            dfs(i + 1, curr)
+            # not take
+            curr.pop()
+            dfs(i + 1, curr)
 
-            n = nums.pop()
-            backtrack(nums, subset)         # exclude n
-            backtrack(nums, subset + [n])   # include n
-            nums.append(n)                  # backtrack (undo)
+        dfs(0, [])
+        return powerset
 
-        backtrack(nums, [])
-        return result
+# take, or not to take the 
+#       [] <- initialize
+#  [1]      [] <- first element, 1: i = 0
+# [1,2] [1] [2] [] <- 2: i = 1
+# [1,2,3] [1,2] ...
+# 2^n possible subsets, time = O(2^n)
+# 2^n * O(n) size of a single subset-> n * 2^n
+# 2^n stacks -> 2^n + n * 2^n = O(n * 2^n )
