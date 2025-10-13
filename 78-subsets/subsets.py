@@ -8,10 +8,8 @@ class Solution:
                 return
             
             # take
-            curr.append(nums[i])
-            dfs(i + 1, curr)
+            dfs(i + 1, curr + [nums[i]])
             # not take
-            curr.pop()
             dfs(i + 1, curr)
 
         dfs(0, [])
