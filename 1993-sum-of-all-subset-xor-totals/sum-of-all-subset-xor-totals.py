@@ -1,29 +1,20 @@
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        subsets = []
-        curr = []
-        def dfs(i):
+        result = [0]
+
+        def dfs(i, xor=None):
             if i == len(nums):
-                subsets.append(curr.copy())
+                result[0] += (xor if xor else 0)
                 return
             
-            curr.append(nums[i])
-            dfs(i + 1)
-            curr.pop()
-            dfs(i + 1)
-        dfs(0)
-
-        result = 0
-        for s in subsets:
-            ans = 0
-            if len(s) > 1:
-                ans = s[0] ^ s[1]
-                for i in range(2, len(s)):
-                    ans = ans ^ s[i]
+            if not xor:
+                dfs(i + 1, nums[i])
             else:
-                ans = 0 if s == [] else s[0]
-            result += ans
-        return result
+                dfs(i+1, xor ^ nums[i])
+            dfs(i + 1, xor)
+
+        dfs(0)
+        return result[0]
             
 
         
