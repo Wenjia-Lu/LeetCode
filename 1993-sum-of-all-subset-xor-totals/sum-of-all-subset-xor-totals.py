@@ -22,7 +22,6 @@ class Solution:
                     ans = ans ^ s[i]
             else:
                 ans = 0 if s == [] else s[0]
-            print(s, ans)
             result += ans
         return result
             
