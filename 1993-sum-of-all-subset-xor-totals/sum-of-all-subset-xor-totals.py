@@ -2,19 +2,13 @@ class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
         result = [0]
 
-        def dfs(i, xor=None):
+        def dfs(i, xor):
             if i == len(nums):
-                result[0] += (xor if xor else 0)
-                return
+                return xor
             
-            if not xor:
-                dfs(i + 1, nums[i])
-            else:
-                dfs(i+1, xor ^ nums[i])
-            dfs(i + 1, xor)
+            return  dfs(i + 1, xor) + dfs(i+1, xor ^ nums[i])
 
-        dfs(0)
-        return result[0]
+        return dfs(0,0)
             
 
         
