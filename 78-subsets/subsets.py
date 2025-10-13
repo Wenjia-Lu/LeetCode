@@ -1,18 +1,20 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         powerset = []
-
-        def dfs(i, curr):
+        curr = []
+        def dfs(i):
             if i == len(nums):
                 powerset.append(curr.copy())
                 return
             
             # take
-            dfs(i + 1, curr + [nums[i]])
+            curr.append(nums[i])
+            dfs(i + 1)
+            curr.pop()
             # not take
-            dfs(i + 1, curr)
+            dfs(i + 1)
 
-        dfs(0, [])
+        dfs(0)
         return powerset
 
 # take, or not to take the 
