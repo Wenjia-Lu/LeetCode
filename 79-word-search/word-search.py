@@ -2,6 +2,8 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         ans = [False]
         def dfs(r,c,word):
+            if ans[0] == True:
+                return
 
             if word == "":
                 ans[0] = ans[0] or True
