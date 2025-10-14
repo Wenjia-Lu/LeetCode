@@ -4,7 +4,6 @@ class Solution:
         result = []
 
         def dfs(i, curr):
-            print(nums, i ,curr)
             if i == len(nums):
                 result.append(curr)
                 return
