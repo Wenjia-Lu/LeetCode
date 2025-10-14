@@ -1,42 +1,47 @@
 class Solution:
-    def left(self,r, c, board):
-        if not 0 <= r < len(board) or not 0 <= c < len(board):
-            return True
-        return board[r][c] != 'Q' and self.left(r-1,c-1, board)
+    def solveNQueens(self, n):
+        # Making use of a helper function to get the
+        # solutions in the correct output format
+        def create_board(state):
+            board = []
+            for row in state:
+                board.append("".join(row))
+            return board
 
-    def right(self,r, c, board):
-        if not 0 <= r < len(board) or not 0 <= c < len(board):
-            return True
-        return board[r][c] != 'Q' and self.right(r-1,c+1, board)
-
-    def isSafe(self, r, c, board):
-        return self.left(r,c, board) and self.right(r,c,board)
-
-    def solveNQueens(self, n: int) -> List[List[str]]:
-        board = [['.' for i in range(n)] for j in range(n)]
-        result = []
-        cols = [0 for i in range(n)]
-
-        def dfs(n_queens, r):
-
-            if n_queens == 0:
-                oneBoard = []
-                for row in board:
-                    oneBoard.append("".join(row))
-                result.append(oneBoard)
+        def backtrack(row, diagonals, anti_diagonals, cols, state):
+            # Base case - N queens have been placed
+            if row == n:
+                ans.append(create_board(state))
                 return
 
-            if r > n-1:
-                return
+            for col in range(n):
+                curr_diagonal = row - col
+                curr_anti_diagonal = row + col
+                # If the queen is not placeable
+                if (
+                    col in cols
+                    or curr_diagonal in diagonals
+                    or curr_anti_diagonal in anti_diagonals
+                ):
+                    continue
 
-            for c in range(n): # go thru each space of first row
-                if board[r][c] == '.' and not cols[c] and self.isSafe(r,c,board):
-                    board[r][c] = 'Q' # choose
-                    cols[c] = 1
-                    dfs(n_queens - 1, r+1)
-                    cols[c] = 0
-                    board[r][c] = '.' # undo
+                # "Add" the queen to the board
+                cols.add(col)
+                diagonals.add(curr_diagonal)
+                anti_diagonals.add(curr_anti_diagonal)
+                state[row][col] = "Q"
 
-        dfs(n, 0)
+                # Move on to the next row with the updated board state
+                backtrack(row + 1, diagonals, anti_diagonals, cols, state)
 
-        return result
+                # "Remove" the queen from the board since we have already
+                # explored all valid paths using the above function call
+                cols.remove(col)
+                diagonals.remove(curr_diagonal)
+                anti_diagonals.remove(curr_anti_diagonal)
+                state[row][col] = "."
+
+        ans = []
+        empty_board = [["."] * n for _ in range(n)]
+        backtrack(0, set(), set(), set(), empty_board)
+        return ans
