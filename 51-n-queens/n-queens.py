@@ -10,9 +10,8 @@ class Solution:
         return board[r][c] != 'Q' and self.right(r-1,c+1, board)
 
     def isSafe(self, r, c, board):
-        n = len(board)
-        for i in range(n):
-            if board[r][i] == 'Q' or board[i][c] == 'Q':
+        for i in range(r):
+            if board[i][c] == 'Q':
                 return False
         return self.left(r,c, board) and self.right(r,c,board)
 
