@@ -10,14 +10,12 @@ class Solution:
         return board[r][c] != 'Q' and self.right(r-1,c+1, board)
 
     def isSafe(self, r, c, board):
-        for i in range(r):
-            if board[i][c] == 'Q':
-                return False
         return self.left(r,c, board) and self.right(r,c,board)
 
     def solveNQueens(self, n: int) -> List[List[str]]:
         board = [['.' for i in range(n)] for j in range(n)]
         result = []
+        cols = [0 for i in range(n)]
 
         def dfs(n_queens, r):
 
@@ -32,9 +30,11 @@ class Solution:
                 return
 
             for c in range(n): # go thru each space of first row
-                if board[r][c] == '.' and self.isSafe(r,c,board):
+                if board[r][c] == '.' and not cols[c] and self.isSafe(r,c,board):
                     board[r][c] = 'Q' # choose
+                    cols[c] = 1
                     dfs(n_queens - 1, r+1)
+                    cols[c] = 0
                     board[r][c] = '.' # undo
 
         dfs(n, 0)
