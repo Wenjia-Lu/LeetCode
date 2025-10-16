@@ -15,11 +15,9 @@ class Solution:
         result = 0
 
         directions = [[-1, 0],[1,0],[0,-1],[0,1]]
-        def visit(r,c):
-            q = collections.deque()
-            q.append((r,c))
-            grid[r][c] = "0"
+        q = collections.deque()
 
+        def visit(r,c):
             while q:
                 a, b = q.popleft() # get current land
 
@@ -29,11 +27,12 @@ class Solution:
                         q.append((r,c))
                         grid[r][c] = "0"
 
-
         for r in range(len(grid)):
             for c in range(len(grid[0])):
                 if grid[r][c] == "1":
                     result += 1
+                    q.append((r,c))
+                    grid[r][c] = "0"
                     visit(r,c)
         return result
         
