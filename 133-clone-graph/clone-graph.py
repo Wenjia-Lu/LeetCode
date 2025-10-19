@@ -11,23 +11,16 @@ class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return None
-        d = {}
 
-        q = collections.deque()
-        q.append(node)
-        d[node] = Node(val=node.val)
-        seen = set()
-        seen.add(node)
+        d = {node: Node(node.val)}
+        q = deque([node])
         while q:
             n = q.popleft()
             for neighbor in n.neighbors:
-                if neighbor not in seen:
+                if neighbor not in d:
                     d[neighbor] = Node(val=neighbor.val)
-                    seen.add(neighbor)
                     q.append(neighbor)
                 d[n].neighbors.append(d[neighbor])
-        
-        print(d)
         return d[node]
 
 
