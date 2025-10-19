@@ -16,8 +16,8 @@ class Solution:
         q = collections.deque()
         q.append(node)
         d[node] = Node(val=node.val)
-
         seen = set()
+        seen.add(node)
         while q:
             n = q.popleft()
             for neighbor in n.neighbors:
