@@ -25,7 +25,6 @@ class Solution:
                                 q.append((r,c)) 
                                 region.add((r,c))
                     else: # escaped
-                        print("escaped!")
                         escaped = True
             
             return region if not escaped else set()
@@ -35,6 +34,5 @@ class Solution:
             for c in range(n):
                 if board[r][c] == "O" and (r,c) not in seen:
                     captured = bfs(r,c)
-                    print(r,c, captured)
                     for a,b in captured:
                         board[a][b] = "X"
