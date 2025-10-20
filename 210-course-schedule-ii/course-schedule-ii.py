@@ -14,8 +14,6 @@ class Solution:
             if deg == 0:
                 q.append(i)
         
-        print(q, ins, adjs)
-
         while q:
             prereq = q.popleft()
             ans.append(prereq)
