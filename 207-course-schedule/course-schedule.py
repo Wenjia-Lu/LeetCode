@@ -6,8 +6,8 @@ class Solution:
         # use queue: enqueue courses with indegree of 0
 
 
-        # time: O(n * E)
-        # space: O(n * E)
+        # time: O(n + E)
+        # space: O(n + E)
         adjs = [[] for _ in range(numCourses)] # prereq -> courses
         ins = [0] * numCourses
         ans = []
