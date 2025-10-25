@@ -8,20 +8,17 @@ class Solution:
             adjs[a].append(b)
             adjs[b].append(a)
         
-        q = collections.deque()
-        q.append(0)
-        prev = {0:-1}
+        q = collections.deque([(0, -1)])
         seen = {0}
         while q:
-            curr = q.popleft() # current node
+            curr, parent = q.popleft() # current node
             for neighbor in adjs[curr]: # for each adj node
-                if neighbor == prev[curr]:
+                if neighbor == parent:
                     continue
                 if neighbor in seen: # check if it's a cycle
                     return False
                 seen.add(neighbor)
-                prev[neighbor] = curr
-                q.append(neighbor)
+                q.append((neighbor, curr))
         return len(seen) == n
         
 
