@@ -9,12 +9,10 @@ class DSU:
         if A != B: # if parents arent the same
             self.components -= 1
             # optimization here: make smaller tree attach to larger tree!
-            if self.size[A] < self.size[B]:
-                self.parent[A] = B
-                self.size[B] += self.size[A]
-            else:
-                self.parent[B] = A
-                self.size[A] += self.size[B]
+            if self.size[A] > self.size[B]:
+                A, B = B, A
+            self.parent[B] = A
+            self.size[A] += self.size[B]
                 
     # def find(self, a):
     #     if self.parent[a] == a:
