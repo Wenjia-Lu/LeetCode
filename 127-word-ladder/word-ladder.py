@@ -12,9 +12,12 @@ class Solution:
     
     def gen(self, s):
         combo = set()
+        tmp = list(s)
         for i in range(len(s)):
             for z in range(26):
-                combo.add(s[:i] + chr(ord('a') + z) + s[i+1:])
+                tmp[i] = chr(ord('a') + z)
+                combo.add("".join(tmp))
+                tmp[i] = s[i]
         combo.remove(s)
         return combo
 
