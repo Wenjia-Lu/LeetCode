@@ -16,11 +16,17 @@ class DSU:
                 self.parent[B] = A
                 self.size[A] += self.size[B]
                 
+    # def find(self, a):
+    #     if self.parent[a] == a:
+    #         return a
+    #     self.parent[a] = self.find(self.parent[a]) # optimization - flatten the tree for search
+    #     return self.parent[a]
+
     def find(self, a):
-        if self.parent[a] == a:
-            return a
-        self.parent[a] = self.find(self.parent[a]) # optimization - flatten the tree for search
-        return self.parent[a]
+        while a != self.parent[a]:
+            self.parent[a] = self.parent[self.parent[a]] # grandparent
+            a = self.parent[a]
+        return a
     
     def getComp(self):
         # return len(set(self.parent))
