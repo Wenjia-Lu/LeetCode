@@ -17,7 +17,7 @@ class Solution:
             for z in range(26):
                 tmp[i] = chr(ord('a') + z)
                 combo.add("".join(tmp))
-                tmp[i] = s[i]
+            tmp[i] = s[i]
         combo.remove(s)
         return combo
 
