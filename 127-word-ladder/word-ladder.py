@@ -9,10 +9,18 @@ class Solution:
                 return False
         # print(f"can transform {s1}, {s2}")
         return True
+    
+    def gen(self, s):
+        combo = set()
+        for i in range(len(s)):
+            for z in range(26):
+                combo.add(s[:i] + chr(ord('a') + z) + s[i+1:])
+        combo.remove(s)
+        return combo
 
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         words = set(wordList)
-        if endWord not in words:
+        if endWord not in words or beginWord == endWord:
             return 0
         q = collections.deque([(beginWord, 1)])
         width = 1
@@ -25,7 +33,9 @@ class Solution:
             width = 0
             curr, layer = q.popleft()
             # print(f"layer {layer}: {curr}")
-            for word in words:
+            combo = self.gen(curr)
+            for word in combo:
+                if word not in words: continue
                 if word in seen: continue
                 if self.canTransform(curr, word):
                     if word == endWord:
