@@ -24,9 +24,13 @@ class Solution:
         while task_completed < len(tasks):
             timer += 1
             
-            if q and q[0][0] <= timer:
-                _, ct2, task_type2 = q.popleft()
-                heapq.heappush(heap, (ct2, task_type2))
+            if q:
+                if q[0][0] <= timer:
+                    _, ct2, task_type2 = q.popleft()
+                    heapq.heappush(heap, (ct2, task_type2))
+                elif not heap:
+                    timer = q[0][0] - 1
+                    continue
 
             if not heap:
                 continue
