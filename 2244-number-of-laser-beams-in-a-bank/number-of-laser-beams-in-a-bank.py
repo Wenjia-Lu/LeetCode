@@ -7,10 +7,8 @@ class Solution:
             if a > 0:
                 perRow.append(a)
         n = len(perRow)
-        l, r = 0, 1
-        while r < n:
-            res += perRow[l] * perRow[r]
-            l, r = r, r+1
+        for i in range(n-1):
+            res += perRow[i] * perRow[i+1]
         
         return res
         
