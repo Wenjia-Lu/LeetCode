@@ -2,13 +2,15 @@ class Solution:
     def numberOfBeams(self, bank: List[str]) -> int:
         perRow = []
         res = 0
+        above, below = -1, -1
         for s in bank:
-            a = s.count("1")
-            if a > 0:
-                perRow.append(a)
-        n = len(perRow)
-        for i in range(n-1):
-            res += perRow[i] * perRow[i+1]
-        
+            ones = s.count("1")
+            if ones == 0:
+                continue
+            if above == -1:
+                above = ones
+            else:
+                below = ones
+                res += above * below
+                above = below
         return res
-        
