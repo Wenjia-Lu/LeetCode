@@ -4,15 +4,11 @@ class Solution:
         # keep track of how many of each tasks we have
         # cycle through all tasks but prioritizing most freq task off cooldown
 
-        # A: 3
-        # B: 3
-        # heap: 
-        # q: (6, -1, A), (7, -1, B)
-        # timer: 5
-        # 
+        # space: O(n)
+        # time: O(n)
 
-        heap = [] # to prioritize most frequent atsk
-        q = deque() # keep track of cool down
+        heap = [] # to prioritize most frequent task. Stores (count, task type)
+        q = deque() # keep track of cooldown. Stores (ready time, count, task type)
 
         count = Counter(tasks) # init heap
         for key in count:
@@ -24,11 +20,11 @@ class Solution:
         while task_completed < len(tasks):
             timer += 1
             
-            if q:
+            if q: # always check q 1st bc it might have the heap item for current timer
                 if q[0][0] <= timer:
                     _, ct2, task_type2 = q.popleft()
                     heapq.heappush(heap, (ct2, task_type2))
-                elif not heap:
+                elif not heap: # fast forward if idle detected
                     timer = q[0][0] - 1
                     continue
 
