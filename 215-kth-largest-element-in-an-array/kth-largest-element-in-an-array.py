@@ -5,6 +5,5 @@ class Solution:
             heapq.heappush(res, n)
             if len(res) > k:
                 heapq.heappop(res)
-        print(res)
         return res[0]
         
