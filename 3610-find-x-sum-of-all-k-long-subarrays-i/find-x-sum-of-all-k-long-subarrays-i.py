@@ -7,12 +7,9 @@ class Solution:
             heapq.heappush(heap, (freq, n))
             if len(heap) > x:
                 heapq.heappop(heap)
+    
         
-        res = 0
-        for freq, n in heap:
-            res += (freq * n)
-        
-        return res
+        return sum(h[1] * h[0] for h in heap)
     def findXSum(self, nums: List[int], k: int, x: int) -> List[int]:
         res = []
         for i in range(len(nums) - k + 1):
