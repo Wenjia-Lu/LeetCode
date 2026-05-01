@@ -10,7 +10,6 @@ class Solution:
         # F(2) = 2X + 0Y + 1Z <- + X clear Y + Z
 
         # init = 1X + 1Y + 1Z
-        ans = [0] * len(nums)
         sum_ = sum(nums)
         n = len(nums)
         clear = n - 1
