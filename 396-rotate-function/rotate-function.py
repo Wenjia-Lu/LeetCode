@@ -19,7 +19,6 @@ class Solution:
         curr = 0
         for i, num in enumerate(nums):
             curr += (i * num)
-        print(curr)
 
         highest = curr
         for i in range(len(nums)-1):
