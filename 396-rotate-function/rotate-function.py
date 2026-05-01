@@ -15,8 +15,7 @@ class Solution:
 
         highest = curr
         for clear in range(n-1, 0, -1):
-            curr += sum_
-            curr -= (nums[clear] * n)
+            curr += sum_ - (nums[clear] * n)
             highest = max(highest, curr)
         return highest
         
