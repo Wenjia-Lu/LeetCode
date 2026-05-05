@@ -11,7 +11,7 @@ class Solution:
                 vote += 1
             else:
                 vote -= 1
-            if vote <= 0:
-                num = n
-                vote = 1
+                if vote <= 0:
+                    num = n
+                    vote = 1
         return num
