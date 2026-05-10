@@ -16,7 +16,6 @@ class Solution:
                 r -= 1
             else: # n == 1
                 m += 1
-            print(m, nums)
 
             
 
