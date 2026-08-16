@@ -2,7 +2,8 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         d = {}
         for i, n in enumerate(nums):
-            if target - n in d: # found
-                return [d[target-n], i]
+            comp = target - n
+            if comp in d:
+                return [i, d[comp]]
             d[n] = i
-        return -1
+        return []
